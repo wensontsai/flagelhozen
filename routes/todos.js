@@ -43,3 +43,8 @@ router.delete('/:id', function(req, res, next) {
     res.json(post);
   });
 });
+
+//app
+router.get('*', function(req, res, next){
+  res.sendfile('../public/partials/todos.html');
+});

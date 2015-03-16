@@ -1,12 +1,27 @@
 var express = require('express');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/flagelhozen', function(err){
+
+/////////////
+// db connect
+/////////////
+var database = require('./config/database.js');
+mongoose.connect(database.url, function(err){
     if(err){
-        console.log('connection error', err);
+        console.log('db connection error!', err);
     } else {
-        console.log('connection successfull');
+        console.log('db connection successful!');
     }
 });
+
+// *** before moving connect to separate file ***
+// mongoose.connect('mongodb://localhost/flagelhozen', function(err){
+//     if(err){
+//         console.log('connection error', err);
+//     } else {
+//         console.log('connection successfull');
+//     }
+// });
+
 
 var path = require('path');
 var favicon = require('static-favicon');
@@ -25,6 +40,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
+////////////////
+// middleware
+////////////////
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -35,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/todos', todos);
+
 
 
 /// catch 404 and forward to error handler
@@ -68,6 +88,10 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+//////////////////////////
+// server + listening port
+//////////////////////////
 app.listen(3030);
 console.log("app listening on port 3030");
 
