@@ -89,6 +89,14 @@ app.use(function(err, req, res, next) {
 });
 
 
+//////////////////
+// angular.js hook
+//////////////////
+app.get('*', function(req, res){
+    res.sendfile('./public/index.html');
+});
+
+
 //////////////////////////
 // server + listening port
 //////////////////////////
