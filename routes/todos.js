@@ -19,8 +19,18 @@ router.get('/', function(req, res, next) {
         completed = data.completed,
         note = data.note
   });
-    res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
-      })
+    // res.render('todos',
+    //   { title: 'All Todos',
+    //     id : id,
+    //     name : name,
+    //     completed : completed,
+    //     note : note });
+    //   })
+   res.render('todos',
+      { title: 'All Todos',
+        todos : todos
+      });
+    })
 });
 
 
@@ -33,10 +43,14 @@ router.post('/', function(req, res, next) {
       note : req.body.note
   });
 
-  Todo.create( {name : todo.name, completed : todo.completed, note : todo.note}, function(err,post){
-    if (err) return next(err);
-    // res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
-    res.redirect('todos');
+  Todo.create(
+    { name : todo.name,
+      completed : todo.completed,
+      note : todo.note
+    }, function(err,post){
+      if (err) return next(err);
+      // res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
+      res.redirect('todos');
   });
 });
 
