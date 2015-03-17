@@ -4,19 +4,28 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Todo = require('../models/Todo.js');
 
-/* GET all todos listing. */
-router.get('/', function(req, res, next) {
-  Todo.find(function (err, todos){
-    if (err) return next(err);
-    res.json(todos);
-  });
-});
-
 module.exports = router;
 
 
+/* GET all todos listing. */
+router.get('/', function(req, res, next) {
+  var id, name, completed, note;
+
+  Todo.find(function (err, todos){
+    if (err) return next(err);
+      todos.forEach(function(data){
+        id = data.id,
+        name = data.name,
+        completed = data.completed,
+        note = data.note
+      })
+    res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
+  });
+});
+
+
 // post and get todo
-router.post('/', function(req, res, next) {
+router.post('/api/todos', function(req, res, next) {
   Todo.create(req.body, function(err,post){
     if (err) return next(err);
     res.json(post);
