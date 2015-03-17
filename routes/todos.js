@@ -19,13 +19,6 @@ router.get('/', function(req, res, next) {
         completed = data.completed,
         note = data.note
   });
-    // res.render('todos',
-    //   { title: 'All Todos',
-    //     id : id,
-    //     name : name,
-    //     completed : completed,
-    //     note : note });
-    //   })
    res.render('todos',
       { title: 'All Todos',
         todos : todos

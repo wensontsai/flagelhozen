@@ -93,7 +93,7 @@ app.use(function(err, req, res, next) {
 // angular.js hook
 //////////////////
 app.get('*', function(req, res){
-    res.sendfile('./public/index.html');
+    res.sendfile('./public/todos/todos.html');
 });
 
 
