@@ -18,17 +18,25 @@ router.get('/', function(req, res, next) {
         name = data.name,
         completed = data.completed,
         note = data.note
-      })
-    res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
   });
+    res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
+      })
 });
 
 
 // post and get todo
-router.post('/api/todos', function(req, res, next) {
-  Todo.create(req.body, function(err,post){
+router.post('/', function(req, res, next) {
+  console.log(req.body);
+  todo = new Todo({
+      name : req.body.name,
+      completed : req.body.completed,
+      note : req.body.note
+  });
+
+  Todo.create( {name : todo.name, completed : todo.completed, note : todo.note}, function(err,post){
     if (err) return next(err);
-    res.json(post);
+    // res.render('todos', { title: 'All Todos', id : id, name : name, completed : completed, note : note });
+    res.redirect('todos');
   });
 });
 

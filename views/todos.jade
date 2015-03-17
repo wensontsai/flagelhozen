@@ -8,3 +8,8 @@ block content
     | completed: #{completed}
     | note: #{note}
     <br /><br />
+
+    form(method="post" action="/todos")
+      label(for="new_todo") Enter New Todo here:
+      input(type="text", name="name")
+      input(type="submit", value="Submit")
