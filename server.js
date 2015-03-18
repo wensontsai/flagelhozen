@@ -1,5 +1,4 @@
 var express = require('express');
-var api = require('./routes/api')
 var mongoose = require('mongoose');
 
 /////////////
@@ -48,18 +47,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
 
 ////////////////
 // routing
 ////////////////
-
-// express - node.js views
-var routes = require('./routes/index');
+// * * *  express - node.js views  * * *
+// var routes = require('./routes/index');
 var todos = require('./routes/todos');
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/todos', todos);
 
 
@@ -71,10 +69,10 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+
 //////////////////
 /// error handlers
 //////////////////
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -98,9 +96,12 @@ app.use(function(err, req, res, next) {
 });
 
 
+
 //////////////////
 // routes to Angular.js + JSON API
 //////////////////
+var api = require('./routes/api');
+
 app.get('/api/todos', api.getAllTodos);
 app.get('/api/todos/:id', api.getTodo);
 app.post('/api/todos', api.createTodo);
@@ -108,7 +109,7 @@ app.put('/api/todos/:id', api.updateTodo);
 app.delete('/api/todos/:id', api.deleteTodo);
 
 app.get('*', function(req, res){
-    res.sendfile('./public/todos/todos.html');
+    res.sendfile('./public/index.html');
 });
 
 

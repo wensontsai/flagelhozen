@@ -11,13 +11,14 @@ mongoose.connect(database.url, function(err){
     }
 });
 
-
-
 var Todo = require('../models/Todo.js');
+
+
 
 /* GET all todos listing. */
 exports.getAllTodos = function(req, res, next) {
   Todo.find({}, function (err, todos){
+    console.log('well something is happening');
     res.json(todos);
   });
 };
