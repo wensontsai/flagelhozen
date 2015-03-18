@@ -30,16 +30,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// var routes = require('./routes/index');
-// var users = require('./routes/users');
-// var todos = require('./routes/todos');
 var app = express();
 
 
-
+////////////////////
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+////////////////////
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 
 ////////////////
@@ -53,11 +51,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 ////////////////
 // routing
 ////////////////
+
+// express - node.js views
+var routes = require('./routes/index');
+var todos = require('./routes/todos');
 app.use('/', routes);
-app.use('/users', users);
 app.use('/todos', todos);
 
 
@@ -99,11 +101,11 @@ app.use(function(err, req, res, next) {
 //////////////////
 // routes to Angular.js + JSON API
 //////////////////
-app.get('/api/todos', api.todos);
-app.get('/api/todos/:id', api.todo);
+app.get('/api/todos', api.getAllTodos);
+app.get('/api/todos/:id', api.getTodo);
 app.post('/api/todos', api.createTodo);
 app.put('/api/todos/:id', api.updateTodo);
-app.delete('/api/todos/:id', api.destroyTodo);
+app.delete('/api/todos/:id', api.deleteTodo);
 
 app.get('*', function(req, res){
     res.sendfile('./public/todos/todos.html');

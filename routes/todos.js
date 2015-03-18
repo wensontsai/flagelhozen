@@ -71,7 +71,9 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
+
+
 //app
-router.get('*', function(req, res, next){
-  res.sendfile('../public/partials/todos.html');
-});
+// router.get('*', function(req, res, next){
+//   res.sendfile('../public/partials/todos.html');
+// });
