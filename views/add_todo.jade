@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h3 #{title}
+     form(method="post" action="/todos")
+      label(for="new_todo") Add new todo name here:
+      input(type="text", name="name")
+      br
+      label(for="new_todo") Is it completed?:
+      input(type="text", name="completed")
+      br
+      label(for="new_todo") Note about this Todo:
+      input(type="text", name="note")
+      br
+      input(type="submit", value="Submit")
