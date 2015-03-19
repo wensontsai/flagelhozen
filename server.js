@@ -102,14 +102,14 @@ app.use(function(err, req, res, next) {
 //////////////////
 var api = require('./routes/api');
 
-app.get('/api/todos', api.getAllTodos);
-app.get('/api/todos/:id', api.getTodo);
-app.post('/api/todos', api.createTodo);
-app.put('/api/todos/:id', api.updateTodo);
-app.delete('/api/todos/:id', api.deleteTodo);
+app.get('/todos2', api.getAllTodos);
+app.get('/todos/:id', api.getTodo);
+app.post('/todos', api.createTodo);
+app.put('/todos/:id', api.updateTodo);
+app.delete('/todos/:id', api.deleteTodo);
 
-app.get('*', function(req, res){
-    res.sendfile('./public/index.html');
+app.get('/', function(req, res, next){
+    res.sendfile('/public/index.html');
 });
 
 
