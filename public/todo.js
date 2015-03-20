@@ -1,9 +1,10 @@
 var TodoApp2 = angular.module('TodoApp2', []);
 
-function mainController($scope, $http) {
+function todoController($scope, $http) {
   $scope.formData = {};
 
   // get all todos and show in view
+  $scope.getAllTodos = function(){
   $http.get('/api/todos')
     .success(function(data){
       $scope.todos = data;
@@ -12,6 +13,7 @@ function mainController($scope, $http) {
     .error(function(data){
       console.log('Error: ' + data);
     });
+  };
 
   // for adding new todo
   $scope.createTodo = function(){
@@ -29,7 +31,7 @@ function mainController($scope, $http) {
 
   // delete a todo after checking it
   $scope.deleteTodo = function(id){
-    $http.delete('/api/todos/' + id)
+    $http.delete('/api/todo/' + id)
       .success(function(data){
         $scope.todos = data;
         console.log(data);

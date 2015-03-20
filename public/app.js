@@ -1,14 +1,20 @@
-'use strict';
-
-angular.module('todoApp', [
-
-
+angular.module('TodoApp2', ['TodoApp2.filters', 'TodoApp2.services', 'TodoApp2.directives'
 ])
-  .config(['$routeProvider', function($routeProvider){
-    $routeProvider.when('/', {
-      templateUrl: './todos/todos',
-      controller: 'TodoController'
-    }).otherwise({
+  .config(['$routeProvider', 'locationProvider', function($routeProvider, $locationProvider){
+    $routeProvider
+      .when('/todos2', {
+        templateUrl: './index.html',
+        controller: 'TodoController'
+    })
+      .when('/', {
+        templateUrl: './index.html',
+        controller: 'TodoController'
+    })
+      .when('/', {
+        templateUrl: './index.html',
+        controller: 'TodoController'
+    })
+      .otherwise({
         rediretTo: '/'
     });
 

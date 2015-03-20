@@ -33,7 +33,7 @@ var app = express();
 
 
 ////////////////////
-// view engine setup
+// EXPRESS/Node.js views engine setup
 ////////////////////
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -47,7 +47,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -98,18 +98,18 @@ app.use(function(err, req, res, next) {
 
 
 //////////////////
-// routes to Angular.js + JSON API
+// routes to ANGULAR.js + JSON API
 //////////////////
 var api = require('./routes/api');
 
-app.get('/todos2', api.getAllTodos);
-app.get('/todos/:id', api.getTodo);
-app.post('/todos', api.createTodo);
-app.put('/todos/:id', api.updateTodo);
-app.delete('/todos/:id', api.deleteTodo);
+app.get('/api/todos', api.getAllTodos);
+app.get('/api/todo/:id', api.getTodo);
+app.post('/api/todo', api.createTodo);
+app.put('/api/todo/:id', api.updateTodo);
+app.delete('/api/todo/:id', api.deleteTodo);
 
-app.get('/', function(req, res, next){
-    res.sendfile('/public/index.html');
+app.get('*', function(req, res, next){
+    res.sendfile('./public/index.html');
 });
 
 
